@@ -24,7 +24,7 @@ class VisuoLinkClient:
         if response:
             return [user.get("username") for user in response.json()]
         return None
-
+    
     def get_user_detail(self, user_id: int) -> Optional[Dict[str, Any]]:
         response = self._request("GET", f"/users/{user_id}")
         if response:
@@ -71,6 +71,7 @@ class VisuoLinkClient:
                 "phone": data.get("phone")
             }
         return None
+
 
 
 API_UP = False

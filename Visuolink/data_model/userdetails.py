@@ -10,6 +10,14 @@ def store_detail(username, name, email, phone):
 def store_preferences(hand_tracking: bool, volume_change: bool) -> None:
     store.put('pref', hand_tracking=hand_tracking, volume_change=volume_change)
 
+def store_profile_id(ids: int):
+    store.put("profile_id", ids=ids)
+
+def get_profile_id():
+    if store.exists('profile_id'):
+        data = store.get('profile_id')
+        return data.get('ids')
+    return 0
 
 def get_detail():
     if store.exists('user'):

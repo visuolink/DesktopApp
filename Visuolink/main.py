@@ -1,4 +1,3 @@
-from kivy.uix.accordion import StringProperty
 from kivy.config import Config
 from platform import system
 from Visuolink.core.utils import resource_path
@@ -6,12 +5,11 @@ from Visuolink.core.utils import resource_path
 Config.set('graphics', 'resizable', False)
 
 if system == "Windows":
-    Config.set('kivy', 'window_icon', resource_path('/assets/visuolink.ico'))
+    Config.set('kivy', 'window_icon', resource_path('assets/visuolink.ico'))
 elif system in ["Darwin", "Linux"]:
-    Config.set('kivy', 'window_icon', resource_path('/assets/visuolink.png'))
+    Config.set('kivy', 'window_icon', resource_path('assets/visuolink.png'))
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
-
 
 from kivy.app import App
 from kivy.uix.popup import Popup
@@ -23,7 +21,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.properties import ObjectProperty, StringProperty
-
+from kivy.lang import Builder
 
 from Visuolink.data_model.visuolink_client import start_api_monitor
 from Visuolink.data_model.userdetails import init_pref, get_detail, get_preferences, store_preferences, is_logged_in
@@ -86,7 +84,7 @@ class HomeScreen(Screen):
             return;
 
         if not any(self.models_status):
-            pop_window("Invalid Model Status", "Enable Models From the setting, please!")
+            pop_window("Invalid Model Status", "Please enable models in the settings!")
             return;
 
         if instance.text == "Start":
@@ -241,14 +239,15 @@ class VisuoLink(App):
     current_screen_name = ObjectProperty("Home")
     def build(self):
         init_pref()
+        return Builder.load_file(resource_path('Visuolink/visuolink_layout.kv'))
+    
+    def on_start(self):
         set_user_data()
         self.create_toolbar_dropdown()
-        return super().build()
-
 
     def create_toolbar_dropdown(self):
         self.dropdown = DropDown()
-        for item in ["Update", "About", "Policy"]:
+        for item in ["Update", "Usages", "About", "Policy"]:
             btn = Button(text=item, size_hint_y=None, height=40, background_color=(0.1, 0.1, 0.1, 1))
             btn.bind(on_release=lambda btn: self.dropdown.select(btn.text))
             self.dropdown.add_widget(btn)
@@ -262,6 +261,8 @@ class VisuoLink(App):
         data = ""
         if selection == "Update":
             data += "Up to date \n no new version available"
+        elif selection == "Usages":
+            data += "Visit the website again,\n check the 'How to Use' Page!"
         elif selection == "About":
             data += (
                 "Made using: Python\n"

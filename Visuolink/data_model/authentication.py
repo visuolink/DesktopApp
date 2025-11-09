@@ -1,5 +1,5 @@
 from Visuolink.data_model.visuolink_client import VisuoLinkClient
-from Visuolink.data_model.userdetails import store_detail, logout
+from Visuolink.data_model.userdetails import store_detail, logout, get_profile_id, store_profile_id
 
 client = VisuoLinkClient()
 API = client.base_url
@@ -19,7 +19,8 @@ def login(username: str, password: str) -> bool:
     user_data = client.get_user_detail(user_id)
     if user_data is None:
         return False
-
+    
+    store_profile_id(user_id)
     store_detail(
         user_data["username"],
         user_data["name"],
