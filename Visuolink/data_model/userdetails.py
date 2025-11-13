@@ -1,6 +1,10 @@
 from kivy.storage.jsonstore import JsonStore
+import os
 
-store = JsonStore('data.json')
+appdata_dir = os.path.join(os.getenv('APPDATA'), 'Visuolink')
+os.makedirs(appdata_dir, exist_ok=True)
+
+store = JsonStore(os.path.join(appdata_dir, 'data.json'))
 
 
 def store_detail(username, name, email, phone):
