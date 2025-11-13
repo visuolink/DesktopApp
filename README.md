@@ -1,6 +1,7 @@
 # 🪢 VisuoLink
 
 VisuoLink is a gesture-based desktop application that enables touchless control of your computer through advanced hand gesture recognition. Control volume, navigate interfaces, and execute commands using intuitive hand movements—bringing a futuristic, hands-free experience to your desktop.
+
 ---
 
 ## 🚀 Features
