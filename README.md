@@ -53,7 +53,7 @@ VisuoLink/
 1. **Clone the repository**
 
    ```bash
-   git clone [https://github.com/visuolink/DesktopApp.git](https://github.com/visuolink/DesktopApp.git)
+   git clone https://github.com/visuolink/DesktopApp.git
    ```
 
 2. **Open in IDE(vs code)**
@@ -89,11 +89,8 @@ If you find a bug or want to improve the app:
 ## 🙏 Acknowledgments
 
 - Mediapipe team for gesture recognition technology
-
 - FastAPI community for backend framework
-
 - Kivy framework developers for UI toolkit
-
 - All contributors and testers
 
 ---
